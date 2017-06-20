@@ -18,8 +18,10 @@ class Test(scrapy.Spider):
         # for sel in response.xpath('//ul/li'):
         table = response.xpath('//ul')
         for n in range(9):
-            path = '//*[@id="sogou_vr_11002601_summary_'+str(n)+'"]'
-            title = table.xpath(path+'/text()')
+            path = '//*[@id="sogou_vr_11002601_box_'+str(n)+'"]'
+            row = table.xpath(path+'/div')
+            title = row.xpath('//*[contains(@class,"txt-box")] \
+             /p/text()').extract()
             msg = repr([x.encode(sys.stdout.encoding) for x in title]).decode('\
             # string-escape')
             print msg
