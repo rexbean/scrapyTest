@@ -21,7 +21,8 @@ class Test(scrapy.Spider):
             path = '//*[@id="sogou_vr_11002601_box_'+str(n)+'"]'
             row = table.xpath(path+'/div')
             title = row.xpath('//*[contains(@class,"txt-box")] \
-             /p/text()').extract()
-            msg = repr([x.encode(sys.stdout.encoding) for x in title]).decode('\
-            # string-escape')
+             /p//text()').extract()[n]
+            msg = title.encode("utf-8")
+    # msg = repr([x.encode(sys.stdout.encoding) for x in title]).decode('\
+        # string-escape')
             print msg
