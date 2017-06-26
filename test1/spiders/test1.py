@@ -17,12 +17,16 @@ class Test(scrapy.Spider):
         # h = HTMLParser.HTMLParser()
         # for sel in response.xpath('//ul/li'):
         table = response.xpath('//ul')
-        for n in range(9):
-            path = '//*[@id="sogou_vr_11002601_box_'+str(n)+'"]'
-            row = table.xpath(path+'/div')
-            title = row.xpath('//*[contains(@class,"txt-box")] \
-             /p//text()').extract()[n]
-            msg = title.encode("utf-8")
-    # msg = repr([x.encode(sys.stdout.encoding) for x in title]).decode('\
+        # for n in range(9):
+        #    path = '//*[@id="sogou_vr_11002601_box_'+str(n)+'"]'
+        #    row = table.xpath(path+'/div')
+        contentList = table.xpath('//*[contains(@class,"txt-box")] \
+        /p//text()').extract()
+        # print contentList
+        print len(contentList)
+        for a in contentList:
+            print a
+
+# msg = repr([x.encode(sys.stdout.encoding) for x in contentList]).decode('\
         # string-escape')
-            print msg
+        # print msg
